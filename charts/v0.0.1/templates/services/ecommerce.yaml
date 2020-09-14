@@ -1,0 +1,30 @@
+{{- if .Values.config.ecommerce.deploy }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "maidsaroundaustin.fullname" . }}-ecommerce
+  labels:
+    app: {{ template "maidsaroundaustin.name" . }}-ecommerce
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  {{- if .Values.ingress.ecommerce.enabled }}
+  type: ClusterIP
+  {{- else }}
+  type: {{ .Values.service.ecommerce.type }}
+  {{- if (or (eq .Values.service.ecommerce.type "LoadBalancer") (eq .Values.service.ecommerce.type "NodePort")) }}
+  externalTrafficPolicy: {{ .Values.service.ecommerce.externalTrafficPolicy }}
+  {{- end }}
+  {{- end }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: container
+      {{- if (and (eq .Values.service.ecommerce.type "NodePort") (not (empty .Values.service.ecommerce.nodePorts.http))) }}
+      nodePort: {{ .Values.service.ecommerce.nodePorts.http }}
+      {{- end }}
+  selector:
+    app: {{ template "maidsaroundaustin.name" . }}-ecommerce
+    release: {{ .Release.Name }}
+{{- end }}

@@ -1,0 +1,13 @@
+name: maidsaroundaustin
+home: https://github.com/ravi/maidsaroundaustin
+icon: https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/262f6e264ccf49c9b63a92bfefab6b1e
+version: 0.0.1
+appVersion: latest
+description: "ecommerce, broomlyadmin, broomlypro and broomlycommerce"
+keywords:
+  - maidsaroundaustin
+sources:
+  - https://github.com/ravi/maidsaroundaustin
+maintainers:
+  - name: "Ravi"
+    email: ravi@austinwebdeveloper.co

@@ -1,0 +1,42 @@
+{{- if .Values.config.broomlyadmin.deploy }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "maidsaroundaustin.fullname" . }}-broomlyadmin
+  labels:
+    app: {{ template "maidsaroundaustin.name" . }}-broomlyadmin
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "maidsaroundaustin.name" . }}-broomlyadmin
+      release: {{ .Release.Name }}
+  strategy:
+    type: {{ .Values.config.updateStrategy }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "maidsaroundaustin.name" . }}-broomlyadmin
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ template "maidsaroundaustin.fullname" . }}-broomlyadmin
+          image: {{ .Values.images.broomlyadmin.repository }}:{{ .Values.images.broomlyadmin.tag }}
+          imagePullPolicy: {{ .Values.config.imagePullPolicy }}
+          ports:
+            - name: container
+              containerPort: 3000
+          env: []
+          livenessProbe:
+            httpGet:
+              path: /
+              port: container
+{{ toYaml .Values.probes.liveness | indent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: container
+{{ toYaml .Values.probes.readiness | indent 12 }}
+{{- end }}

@@ -1,0 +1,37 @@
+{{- if .Values.config.broomlycommerce.deploy }}
+{{- if .Values.ingress.broomlycommerce.enabled }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "maidsaroundaustin.fullname" . }}-broomlycommerce
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    {{- if .Values.ingress.broomlycommerce.tls }}
+    {{- if (empty .Values.ingress.broomlycommerce.certificate) }}
+    certmanager.k8s.io/cluster-issuer: {{ .Values.ingress.broomlycommerce.issuer.name }}
+    kubernetes.io/tls-acme: 'true'
+    {{- end }}
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    {{- end }}
+  labels:
+    app: {{ template "maidsaroundaustin.name" . }}-broomlycommerce
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.broomlycommerce.hostname }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.broomlycommerce.path }}
+            backend:
+              serviceName: {{ template "maidsaroundaustin.fullname" . }}-broomlycommerce
+              servicePort: http
+  {{- if .Values.ingress.broomlycommerce.tls }}
+  tls:
+    - secretName: {{ template "maidsaroundaustin.broomlycommerce-certificate" . }}
+      hosts:
+        - {{ .Values.ingress.broomlycommerce.hostname }}
+  {{- end }}
+{{- end }}
+{{- end }}

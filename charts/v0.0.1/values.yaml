@@ -1,0 +1,120 @@
+images:
+  ecommerce:
+    repository:
+    tag: atxwebdesigner/maidsaroundtown-ecommerce
+  broomlyadmin:
+    repository:
+    tag: atxwebdesigner/maidsaroundtown-broomlyadmin
+  broomlypro:
+    repository:
+    tag: atxwebdesigner/maidsaroundtown-broomlypro
+  broomlycommerce:
+    repository:
+    tag: atxwebdesigner/maidsaroundtown-broomlycommerce
+
+config:
+  imagePullPolicy: IfNotPresent
+  updateStrategy: RollingUpdate
+  ecommerce:
+    deploy: true
+    baseUrl: ""
+    hostname: ""
+  broomlyadmin:
+    deploy: true
+    baseUrl: ""
+    hostname: ""
+  broomlypro:
+    deploy: true
+    baseUrl: ""
+    hostname: ""
+  broomlycommerce:
+    deploy: true
+    baseUrl: ""
+    hostname: ""
+
+service:
+  ecommerce:
+    type: NodePort
+    externalTrafficPolicy: Cluster
+    nodePorts:
+      http: ""
+  broomlyadmin:
+    type: NodePort
+    externalTrafficPolicy: Cluster
+    nodePorts:
+      http: ""
+  broomlypro:
+    type: NodePort
+    externalTrafficPolicy: Cluster
+    nodePorts:
+      http: ""
+  broomlycommerce:
+    type: NodePort
+    externalTrafficPolicy: Cluster
+    nodePorts:
+      http: ""
+
+ingress:
+  ecommerce:
+    certificate: ""
+    enabled: false
+    hostname: ""
+    path: /
+    tls: false
+    issuer:
+      name: letsencrypt-staging
+  broomlyadmin:
+    certificate: ""
+    enabled: false
+    hostname: ""
+    path: /
+    tls: false
+    issuer:
+      name: letsencrypt-staging
+  broomlypro:
+    certificate: ""
+    enabled: false
+    hostname: ""
+    path: /
+    tls: false
+    issuer:
+      name: letsencrypt-staging
+  broomlycommerce:
+    certificate: ""
+    enabled: false
+    hostname: ""
+    path: /
+    tls: false
+    issuer:
+      name: letsencrypt-staging
+
+persistence:
+  accessMode: ReadWriteOnce
+  enabled: false
+  existingClaim: ""
+  size: 1Gi
+  storageClass: ""
+  velero:
+    enabled: false
+  stash:
+    enabled: false
+    keepLast: 30
+    paused: false
+    repository: stash-stash
+    schedule: "0 0 * * *"
+    restore:
+      snapshot: ""
+
+probes:
+  liveness:
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+    successThreshold: 1
+  readiness:
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 6
+    successThreshold: 1

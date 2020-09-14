@@ -1,0 +1,30 @@
+{{- if .Values.config.broomlyadmin.deploy }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "maidsaroundaustin.fullname" . }}-broomlyadmin
+  labels:
+    app: {{ template "maidsaroundaustin.name" . }}-broomlyadmin
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  {{- if .Values.ingress.broomlyadmin.enabled }}
+  type: ClusterIP
+  {{- else }}
+  type: {{ .Values.service.broomlyadmin.type }}
+  {{- if (or (eq .Values.service.broomlyadmin.type "LoadBalancer") (eq .Values.service.broomlyadmin.type "NodePort")) }}
+  externalTrafficPolicy: {{ .Values.service.broomlyadmin.externalTrafficPolicy }}
+  {{- end }}
+  {{- end }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: container
+      {{- if (and (eq .Values.service.broomlyadmin.type "NodePort") (not (empty .Values.service.broomlyadmin.nodePorts.http))) }}
+      nodePort: {{ .Values.service.broomlyadmin.nodePorts.http }}
+      {{- end }}
+  selector:
+    app: {{ template "maidsaroundaustin.name" . }}-broomlyadmin
+    release: {{ .Release.Name }}
+{{- end }}

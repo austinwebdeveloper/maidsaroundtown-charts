@@ -1,0 +1,37 @@
+{{- if .Values.config.broomlyadmin.deploy }}
+{{- if .Values.ingress.broomlyadmin.enabled }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "maidsaroundaustin.fullname" . }}-broomlyadmin
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    {{- if .Values.ingress.broomlyadmin.tls }}
+    {{- if (empty .Values.ingress.broomlyadmin.certificate) }}
+    certmanager.k8s.io/cluster-issuer: {{ .Values.ingress.broomlyadmin.issuer.name }}
+    kubernetes.io/tls-acme: 'true'
+    {{- end }}
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    {{- end }}
+  labels:
+    app: {{ template "maidsaroundaustin.name" . }}-broomlyadmin
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.broomlyadmin.hostname }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.broomlyadmin.path }}
+            backend:
+              serviceName: {{ template "maidsaroundaustin.fullname" . }}-broomlyadmin
+              servicePort: http
+  {{- if .Values.ingress.broomlyadmin.tls }}
+  tls:
+    - secretName: {{ template "maidsaroundaustin.broomlyadmin-certificate" . }}
+      hosts:
+        - {{ .Values.ingress.broomlyadmin.hostname }}
+  {{- end }}
+{{- end }}
+{{- end }}

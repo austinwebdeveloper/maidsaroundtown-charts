@@ -1,0 +1,455 @@
+categories:
+  - Server
+questions:
+  # Config
+  - variable: config.imagePullPolicy
+    default: IfNotPresent
+    description: ""
+    type: enum
+    options:
+      - IfNotPresent
+      - Always
+    required: true
+    label: "pull policy"
+    group: Config
+  - variable: config.updateStrategy
+    default: RollingUpdate
+    description: ""
+    type: enum
+    options:
+      - RollingUpdate
+      - Recreate
+    required: true
+    label: "update strategy"
+    group: Config
+  - variable: config.broomlyadmin.deploy
+    default: false
+    description: ""
+    type: boolean
+    required: true
+    label: deploy broomlyadmin
+    group: "Config"
+  - variable: config.broomlycommerce.deploy
+    default: false
+    description: ""
+    type: boolean
+    required: true
+    label: deploy broomlycommerce
+    group: "Config"
+  - variable: config.broomlypro.deploy
+    default: false
+    description: ""
+    type: boolean
+    required: true
+    label: deploy broomlypro
+    group: "Config"
+  - variable: config.ecommerce.deploy
+    default: false
+    description: ""
+    type: boolean
+    required: true
+    label: deploy ecommerce
+    group: "Config"
+
+  # Persistence
+  - variable: persistence.enabled
+    default: false
+    description: ""
+    type: boolean
+    required: true
+    label: enabled
+    show_subquestion_if: true
+    group: Persistence
+    subquestions:
+      - variable: persistence.size
+        default: 1Gi
+        description: ""
+        type: string
+        required: true
+        label: size
+      - variable: persistence.storageClass
+        default: ""
+        description: ""
+        type: storageclass
+        required: false
+        label: "storage class"
+      - variable: persistence.accessMode
+        default: ReadWriteOnce
+        description: ""
+        type: enum
+        options:
+          - ReadWriteOnce
+          - ReadWriteMany
+          - ReadOnlyMany
+        required: false
+        label: "access mode"
+      - variable: persistence.existingClaim
+        default: ""
+        description: ""
+        type: string
+        required: false
+        label: "existing claim"
+      - variable: persistence.velero.enabled
+        default: false
+        description: ""
+        type: boolean
+        required: true
+        label: "velero enabled"
+      - variable: persistence.stash.enabled
+        default: false
+        description: ""
+        type: boolean
+        required: true
+        label: "stash enabled"
+      - variable: persistence.stash.paused
+        default: false
+        description: ""
+        type: boolean
+        required: true
+        show_if: persistence.stash.enabled=true
+        label: "stash paused"
+      - variable: persistence.stash.schedule
+        default: "0 0 * * *"
+        description: ""
+        type: string
+        required: true
+        show_if: persistence.stash.enabled=true
+        label: "stash schedule"
+      - variable: persistence.stash.keepLast
+        default: 30
+        description: ""
+        type: int
+        required: true
+        show_if: persistence.stash.enabled=true
+        label: "stash keep last"
+      - variable: persistence.stash.restore.snapshot
+        default: ""
+        description: ""
+        type: string
+        required: false
+        show_if: persistence.stash.enabled=true
+        label: "stash restore snapshot"
+
+  # Services and Load Balancing
+  - variable: ingress.ecommerce.enabled
+    default: true
+    description: ""
+    type: boolean
+    label: "ecommerce ingress enabled"
+    show_subquestion_if: true
+    group: "Services and Load Balancing"
+    subquestions:
+      - variable: ingress.ecommerce.tls
+        default: false
+        description: ""
+        type: boolean
+        required: true
+        label: "ecommerce ingress tls"
+      - variable: ingress.ecommerce.hostname
+        default: xip.io
+        description: ""
+        type: hostname
+        required: true
+        label: "ecommerce ingress hostname"
+      - variable: ingress.ecommerce.path
+        default: /
+        description: ""
+        type: string
+        required: true
+        label: "ecommerce ingress path"
+      - variable: ingress.ecommerce.issuer.name
+        default: letsencrypt-staging
+        description: ""
+        type: enum
+        show_if: ingress.ecommerce.tls=true
+        options:
+          - none
+          - letsencrypt-staging
+          - letsencrypt-prod
+        required: true
+        label: "ecommerce ingress issuer name"
+      - variable: ingress.ecommerce.certificate
+        default: ""
+        description: ""
+        type: string
+        show_if: ingress.ecommerce.tls=true&&ingress.ecommerce.issuer.name=none
+        required: false
+        label: "ecommerce ingress certificate"
+  - variable: service.ecommerce.type
+    default: NodePort
+    description: ""
+    type: enum
+    show_if: ingress.ecommerce.enabled=false
+    options:
+      - ClusterIP
+      - NodePort
+      - LoadBalancer
+    required: true
+    label: "ecommerce service type"
+    show_subquestion_if: NodePort
+    group: "Services and Load Balancing"
+    subquestions:
+      - variable: service.ecommerce.nodePorts.http
+        default: ""
+        description: ""
+        type: int
+        min: 30000
+        max: 32767
+        show_if: ingress.ecommerce.enabled=false
+        label: "ecommerce http port"
+  - variable: ingress.broomlyadmin.enabled
+    default: true
+    description: ""
+    type: boolean
+    label: "broomlyadmin ingress enabled"
+    show_subquestion_if: true
+    group: "Services and Load Balancing"
+    subquestions:
+      - variable: ingress.broomlyadmin.tls
+        default: false
+        description: ""
+        type: boolean
+        required: true
+        label: "broomlyadmin ingress tls"
+      - variable: ingress.broomlyadmin.hostname
+        default: xip.io
+        description: ""
+        type: hostname
+        required: true
+        label: "broomlyadmin ingress hostname"
+      - variable: ingress.broomlyadmin.path
+        default: /
+        description: ""
+        type: string
+        required: true
+        label: "broomlyadmin ingress path"
+      - variable: ingress.broomlyadmin.issuer.name
+        default: letsencrypt-staging
+        description: ""
+        type: enum
+        show_if: ingress.broomlyadmin.tls=true
+        options:
+          - none
+          - letsencrypt-staging
+          - letsencrypt-prod
+        required: true
+        label: "broomlyadmin ingress issuer name"
+      - variable: ingress.broomlyadmin.certificate
+        default: ""
+        description: ""
+        type: string
+        show_if: ingress.broomlyadmin.tls=true&&ingress.broomlyadmin.issuer.name=none
+        required: false
+        label: "broomlyadmin ingress certificate"
+  - variable: service.broomlyadmin.type
+    default: NodePort
+    description: ""
+    type: enum
+    show_if: ingress.broomlyadmin.enabled=false
+    options:
+      - ClusterIP
+      - NodePort
+      - LoadBalancer
+    required: true
+    label: "broomlyadmin service type"
+    show_subquestion_if: NodePort
+    group: "Services and Load Balancing"
+    subquestions:
+      - variable: service.broomlyadmin.nodePorts.http
+        default: ""
+        description: ""
+        type: int
+        min: 30000
+        max: 32767
+        show_if: ingress.broomlyadmin.enabled=false
+        label: "broomlyadmin http port"
+  - variable: ingress.broomlypro.enabled
+    default: true
+    description: ""
+    type: boolean
+    label: "broomlypro ingress enabled"
+    show_subquestion_if: true
+    group: "Services and Load Balancing"
+    subquestions:
+      - variable: ingress.broomlypro.tls
+        default: false
+        description: ""
+        type: boolean
+        required: true
+        label: "broomlypro ingress tls"
+      - variable: ingress.broomlypro.hostname
+        default: xip.io
+        description: ""
+        type: hostname
+        required: true
+        label: "broomlypro ingress hostname"
+      - variable: ingress.broomlypro.path
+        default: /
+        description: ""
+        type: string
+        required: true
+        label: "broomlypro ingress path"
+      - variable: ingress.broomlypro.issuer.name
+        default: letsencrypt-staging
+        description: ""
+        type: enum
+        show_if: ingress.broomlypro.tls=true
+        options:
+          - none
+          - letsencrypt-staging
+          - letsencrypt-prod
+        required: true
+        label: "broomlypro ingress issuer name"
+      - variable: ingress.broomlypro.certificate
+        default: ""
+        description: ""
+        type: string
+        show_if: ingress.broomlypro.tls=true&&ingress.broomlypro.issuer.name=none
+        required: false
+        label: "broomlypro ingress certificate"
+  - variable: service.broomlypro.type
+    default: NodePort
+    description: ""
+    type: enum
+    show_if: ingress.broomlypro.enabled=false
+    options:
+      - ClusterIP
+      - NodePort
+      - LoadBalancer
+    required: true
+    label: "broomlypro service type"
+    show_subquestion_if: NodePort
+    group: "Services and Load Balancing"
+    subquestions:
+      - variable: service.broomlypro.nodePorts.http
+        default: ""
+        description: ""
+        type: int
+        min: 30000
+        max: 32767
+        show_if: ingress.broomlypro.enabled=false
+        label: "broomlypro http port"
+  - variable: ingress.broomlycommerce.enabled
+    default: true
+    description: ""
+    type: boolean
+    label: "broomlycommerce ingress enabled"
+    show_subquestion_if: true
+    group: "Services and Load Balancing"
+    subquestions:
+      - variable: ingress.broomlycommerce.tls
+        default: false
+        description: ""
+        type: boolean
+        required: true
+        label: "broomlycommerce ingress tls"
+      - variable: ingress.broomlycommerce.hostname
+        default: xip.io
+        description: ""
+        type: hostname
+        required: true
+        label: "broomlycommerce ingress hostname"
+      - variable: ingress.broomlycommerce.path
+        default: /
+        description: ""
+        type: string
+        required: true
+        label: "broomlycommerce ingress path"
+      - variable: ingress.broomlycommerce.issuer.name
+        default: letsencrypt-staging
+        description: ""
+        type: enum
+        show_if: ingress.broomlycommerce.tls=true
+        options:
+          - none
+          - letsencrypt-staging
+          - letsencrypt-prod
+        required: true
+        label: "broomlycommerce ingress issuer name"
+      - variable: ingress.broomlycommerce.certificate
+        default: ""
+        description: ""
+        type: string
+        show_if: ingress.broomlycommerce.tls=true&&ingress.broomlycommerce.issuer.name=none
+        required: false
+        label: "broomlycommerce ingress certificate"
+  - variable: service.broomlycommerce.type
+    default: NodePort
+    description: ""
+    type: enum
+    show_if: ingress.broomlycommerce.enabled=false
+    options:
+      - ClusterIP
+      - NodePort
+      - LoadBalancer
+    required: true
+    label: "broomlycommerce service type"
+    show_subquestion_if: NodePort
+    group: "Services and Load Balancing"
+    subquestions:
+      - variable: service.broomlycommerce.nodePorts.http
+        default: ""
+        description: ""
+        type: int
+        min: 30000
+        max: 32767
+        show_if: ingress.broomlycommerce.enabled=false
+        label: "broomlycommerce http port"
+
+  # Images
+  - variable: images.ecommerce.repository
+    default:
+    description: ""
+    type: string
+    required: true
+    label: "ecommerce repository"
+    group: Images
+  - variable: images.ecommerce.tag
+    default: atxwebdesigner/maidsaroundtown-ecommerce
+    description: ""
+    type: string
+    required: true
+    label: "ecommerce tag"
+    group: Images
+  - variable: images.broomlyadmin.repository
+    default:
+    description: ""
+    type: string
+    required: true
+    label: "broomlyadmin repository"
+    group: Images
+  - variable: images.broomlyadmin.tag
+    default: atxwebdesigner/maidsaroundtown-broomlyadmin
+    description: ""
+    type: string
+    required: true
+    label: "broomlyadmin tag"
+    group: Images
+  - variable: images.broomlypro.repository
+    default:
+    description: ""
+    type: string
+    required: true
+    label: "broomlypro repository"
+    group: Images
+  - variable: images.broomlypro.tag
+    default: atxwebdesigner/maidsaroundtown-broomlypro
+    description: ""
+    type: string
+    required: true
+    label: "broomlypro tag"
+    group: Images
+  - variable: images.broomlycommerce.repository
+    default:
+    description: ""
+    type: string
+    required: true
+    label: "broomlycommerce repository"
+    group: Images
+  - variable: images.broomlycommerce.tag
+    default: atxwebdesigner/maidsaroundtown-broomlycommerce
+    description: ""
+    type: string
+    required: true
+    label: "broomlycommerce tag"
+    group: Images
