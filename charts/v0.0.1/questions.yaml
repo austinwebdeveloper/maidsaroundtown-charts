@@ -136,6 +136,7 @@ questions:
     description: ""
     type: boolean
     label: "ecommerce ingress enabled"
+    show_if: config.ecommerce.deploy=true
     show_subquestion_if: true
     group: "Services and Load Balancing"
     subquestions:
@@ -202,6 +203,7 @@ questions:
     description: ""
     type: boolean
     label: "broomlyadmin ingress enabled"
+    show_if: config.broomlyadmin.deploy=true
     show_subquestion_if: true
     group: "Services and Load Balancing"
     subquestions:
@@ -268,6 +270,7 @@ questions:
     description: ""
     type: boolean
     label: "broomlypro ingress enabled"
+    show_if: config.broomlypro.deploy=true
     show_subquestion_if: true
     group: "Services and Load Balancing"
     subquestions:
@@ -334,6 +337,7 @@ questions:
     description: ""
     type: boolean
     label: "broomlycommerce ingress enabled"
+    show_if: config.broomlycommerce.deploy=true
     show_subquestion_if: true
     group: "Services and Load Balancing"
     subquestions:
@@ -398,58 +402,66 @@ questions:
 
   # Images
   - variable: images.ecommerce.repository
-    default:
+    default: atxwebdesigner/maidsaroundtown-ecommerce
     description: ""
     type: string
+    show_if: config.ecommerce.deploy=true
     required: true
     label: "ecommerce repository"
     group: Images
   - variable: images.ecommerce.tag
-    default: atxwebdesigner/maidsaroundtown-ecommerce
+    default: latest
     description: ""
     type: string
+    show_if: config.ecommerce.deploy=true
     required: true
     label: "ecommerce tag"
     group: Images
   - variable: images.broomlyadmin.repository
-    default:
+    default: atxwebdesigner/maidsaroundtown-broomlyadmin
     description: ""
     type: string
+    show_if: config.broomlyadmin.deploy=true
     required: true
     label: "broomlyadmin repository"
     group: Images
   - variable: images.broomlyadmin.tag
-    default: atxwebdesigner/maidsaroundtown-broomlyadmin
+    default: latest
     description: ""
     type: string
+    show_if: config.broomlyadmin.deploy=true
     required: true
     label: "broomlyadmin tag"
     group: Images
   - variable: images.broomlypro.repository
-    default:
+    default: atxwebdesigner/maidsaroundtown-broomlypro
     description: ""
     type: string
+    show_if: config.broomlypro.deploy=true
     required: true
     label: "broomlypro repository"
     group: Images
   - variable: images.broomlypro.tag
-    default: atxwebdesigner/maidsaroundtown-broomlypro
+    default: latest
     description: ""
     type: string
+    show_if: config.broomlypro.deploy=true
     required: true
     label: "broomlypro tag"
     group: Images
   - variable: images.broomlycommerce.repository
-    default:
+    default: atxwebdesigner/maidsaroundtown-broomlycommerce
     description: ""
     type: string
+    show_if: config.broomlycommerce.deploy=true
     required: true
     label: "broomlycommerce repository"
     group: Images
   - variable: images.broomlycommerce.tag
-    default: atxwebdesigner/maidsaroundtown-broomlycommerce
+    default: latest
     description: ""
     type: string
+    show_if: config.broomlycommerce.deploy=true
     required: true
     label: "broomlycommerce tag"
     group: Images

@@ -16,19 +16,19 @@ config:
   imagePullPolicy: IfNotPresent
   updateStrategy: RollingUpdate
   ecommerce:
-    deploy: true
+    deploy: false
     baseUrl: ""
     hostname: ""
   broomlyadmin:
-    deploy: true
+    deploy: false
     baseUrl: ""
     hostname: ""
   broomlypro:
-    deploy: true
+    deploy: false
     baseUrl: ""
     hostname: ""
   broomlycommerce:
-    deploy: true
+    deploy: false
     baseUrl: ""
     hostname: ""
 
