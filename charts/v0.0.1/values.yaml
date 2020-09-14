@@ -1,16 +1,16 @@
 images:
   ecommerce:
-    repository:
-    tag: atxwebdesigner/maidsaroundtown-ecommerce
+    repository: atxwebdesigner/maidsaroundtown-ecommerce
+    tag: latest
   broomlyadmin:
-    repository:
-    tag: atxwebdesigner/maidsaroundtown-broomlyadmin
+    repository: atxwebdesigner/maidsaroundtown-broomlyadmin
+    tag: latest
   broomlypro:
-    repository:
-    tag: atxwebdesigner/maidsaroundtown-broomlypro
+    repository: atxwebdesigner/maidsaroundtown-broomlypro
+    tag: latest
   broomlycommerce:
-    repository:
-    tag: atxwebdesigner/maidsaroundtown-broomlycommerce
+    repository: atxwebdesigner/maidsaroundtown-broomlycommerce
+    tag: latest
 
 config:
   imagePullPolicy: IfNotPresent
