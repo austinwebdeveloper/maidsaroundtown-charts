@@ -41,15 +41,15 @@ questions:
     description: ""
     type: string
     required: true
-    label: broomlyadmin redisHost
+    label: broomlyadmin redis host
     show_if: config.broomlyadmin.deploy=true
     group: "Config"
-  - variable: config.broomlyadmin.authPass
+  - variable: config.broomlyadmin.redisAuthPass
     default: ""
     description: ""
     type: password
     required: true
-    label: broomlyadmin authPass
+    label: broomlyadmin redis auth pass
     show_if: config.broomlyadmin.deploy=true
     group: "Config"
   - variable: config.broomlypro.deploy

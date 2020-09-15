@@ -26,7 +26,7 @@ config:
     baseUrl: ""
     hostname: ""
     redisHost: ""
-    authPass: ""
+    redisAuthPass: ""
   broomlypro:
     deploy: false
     baseUrl: ""
