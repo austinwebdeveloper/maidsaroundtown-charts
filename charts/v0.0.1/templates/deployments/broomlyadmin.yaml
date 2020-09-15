@@ -78,12 +78,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: redis_host
+                    key: boomlyadmin_redis_host
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: redis_password
+                    key: boomlyadmin_redis_auth_pass
             - name: FRONTAPP_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -119,16 +119,6 @@ spec:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
                     key: test_desc
-            - name: MAID_STRIPE
-              valueFrom:
-                secretKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: maid_stripe
-            - name: YARD_STRIPE
-              valueFrom:
-                secretKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: yard_stripe
           livenessProbe:
             httpGet:
               path: /
