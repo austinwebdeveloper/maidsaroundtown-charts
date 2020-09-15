@@ -33,7 +33,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: ecommerce_site_url
+                    key: broomlyadmin_site_url
             - name: SITE_MODE
               valueFrom:
                 configMapKeyRef:
@@ -44,16 +44,6 @@ spec:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
                     key: site_homepage
-            - name: SITE_SESSION
-              valueFrom:
-                secretKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: site_session
-            - name: SITE_ZOHO_SOURCE
-              valueFrom:
-                configMapKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: site_zoho_source
             - name: BROOMLYSQLSERVER_HOST
               valueFrom:
                 configMapKeyRef:

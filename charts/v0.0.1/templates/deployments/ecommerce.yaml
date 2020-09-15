@@ -48,7 +48,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: site_session
+                    key: ecommerce_site_session
             - name: SITE_ZOHO_SOURCE
               valueFrom:
                 configMapKeyRef:
