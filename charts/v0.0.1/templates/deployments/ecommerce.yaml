@@ -53,7 +53,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: site_zoho_source
+                    key: ecommerce_site_zoho_source
             - name: BROOMLYSQLSERVER_HOST
               valueFrom:
                 configMapKeyRef:
