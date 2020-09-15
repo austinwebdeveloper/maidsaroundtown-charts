@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "maidsaroundaustin.fullname" . }}
+  labels:
+    app: {{ template "maidsaroundaustin.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  ecommerce_site_url: {{ template "maidsaroundaustin.ecommerce-base-url" . }}
+  broomlyadmin_site_url: {{ template "maidsaroundaustin.broomlyadmin-base-url" . }}
+  broomlycommerce_site_url: {{ template "maidsaroundaustin.broomlycommerce-base-url" . }}
+  broomlypro_site_url: {{ template "maidsaroundaustin.broomlypro-base-url" . }}
+  site_mode: {{ .Values.config.siteMode | quote }}
+  site_homepage: {{ .Values.config.ecommerce.siteHomepage | quote }}
+  ecommerce_site_zoho_source: {{ .Values.config.ecommerce.siteZohoSource | quote }}
+  broomlysqlserver_host: {{ .Values.config.broomlysqlserverHost | quote }}
+  broomlysqlserver_user: {{ .Values.config.broomlysqlserverUser | quote }}
+  broomlysqlserver_database: {{ .Values.config.broomlysqlserverDatabase | quote }}
+  redis_host: {{ .Values.config.redisHost | quote }}
+  boomlyadmin_redis_host: {{ .Values.config.broomlyadmin.redisHost | quote }}
+  frontapp_text_channel: {{ .Values.config.frontappTextChannel | quote }}
+  frontapp_email_channel: {{ .Values.config.frontappEmailChannel | quote }}
+  test_phone: {{ .Values.config.testPhone | quote }}
+  test_email: {{ .Values.config.testEmail | quote }}
+  test_name: {{ .Values.config.testName | quote }}
+  test_desc: {{ .Values.config.testDesc | quote }}
+

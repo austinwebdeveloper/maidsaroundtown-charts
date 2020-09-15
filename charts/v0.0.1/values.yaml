@@ -19,10 +19,14 @@ config:
     deploy: false
     baseUrl: ""
     hostname: ""
+    siteSession: "broomlycommerce"
+    siteZohoSource: ""
   broomlyadmin:
     deploy: false
     baseUrl: ""
     hostname: ""
+    redisHost: ""
+    authPass: ""
   broomlypro:
     deploy: false
     baseUrl: ""
@@ -31,6 +35,23 @@ config:
     deploy: false
     baseUrl: ""
     hostname: ""
+  siteMode: ""
+  siteHomepage: ""
+  broomlysqlserverHost: ""
+  broomlysqlserverUser: ""
+  broomlysqlserverDatabase: ""
+  broomlysqlserverPassword: ""
+  redisHost: ""
+  redisPassword: ""
+  frontappToken: ""
+  frontappTextChannel: ""
+  frontappEmailChannel: ""
+  testPhone: ""
+  testEmail: ""
+  testName: ""
+  testDesc: ""
+  maidStripe: ""
+  yardStripe: ""
 
 service:
   ecommerce:

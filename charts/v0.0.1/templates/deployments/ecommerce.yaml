@@ -28,7 +28,107 @@ spec:
           ports:
             - name: container
               containerPort: 2000
-          env: []
+          env:
+            - name: SITE_URL
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: ecommerce_site_url
+            - name: SITE_MODE
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: site_mode
+            - name: SITE_HOMEPAGE
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: site_homepage
+            - name: SITE_SESSION
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: site_session
+            - name: SITE_ZOHO_SOURCE
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: site_zoho_source
+            - name: BROOMLYSQLSERVER_HOST
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: broomlysqlserverUser
+            - name: BROOMLYSQLSERVER_USER
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: broomlysqlserverUser
+            - name: BROOMLYSQLSERVER_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: broomlysqlserverDatabase
+            - name: BROOMLYSQLSERVER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: broomlysqlserverPassword
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: redisHost
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: redisPassword
+            - name: FRONTAPP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: frontappToken
+            - name: FRONTAPP_TEXT_CHANNEL
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: frontappTextChannel
+            - name: FRONTAPP_EMAIL_CHANNEL
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: frontappEmailChannel
+            - name: TEST_PHONE
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: testPhone
+            - name: TEST_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: testEmail
+            - name: TEST_NAME
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: testName
+            - name: TEST_DESC
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: testDesc
+            - name: MAID_STRIPE
+              valueFrom:
+                secretKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: maidStripe
+            - name: YARD_STRIPE
+              valueFrom:
+                secretKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: yardStripe
           livenessProbe:
             httpGet:
               path: /

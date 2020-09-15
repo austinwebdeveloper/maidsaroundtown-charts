@@ -36,6 +36,22 @@ questions:
     required: true
     label: deploy broomlycommerce
     group: "Config"
+  - variable: config.broomlyadmin.redisHost
+    default: "broomly-auth.redis.cache.windows.net"
+    description: ""
+    type: string
+    required: true
+    label: broomlyadmin redisHost
+    show_if: config.broomlyadmin.deploy=true
+    group: "Config"
+  - variable: config.broomlyadmin.authPass
+    default: ""
+    description: ""
+    type: password
+    required: true
+    label: broomlyadmin authPass
+    show_if: config.broomlyadmin.deploy=true
+    group: "Config"
   - variable: config.broomlypro.deploy
     default: false
     description: ""
@@ -49,6 +65,141 @@ questions:
     type: boolean
     required: true
     label: deploy ecommerce
+    group: "Config"
+  - variable: config.ecommerce.siteSession
+    default: "broomlycommerce"
+    description: ""
+    type: password
+    required: true
+    show_if: config.ecommerce.deploy=true
+    label: ecommerce siteSession
+    group: "Config"
+  - variable: config.ecommerce.siteZohoSource
+    default: "Broomly Website"
+    description: ""
+    type: string
+    required: true
+    show_if: config.ecommerce.deploy=true
+    label: ecommerce siteZohoSource
+    group: "Config"
+  - variable: config.siteMode
+    default: "production"
+    description: ""
+    type: string
+    required: true
+    label: site mode
+    group: "Config"
+  - variable: config.siteHomepage
+    default: "index.html"
+    description: ""
+    type: string
+    required: true
+    label: site Homepage
+    group: "Config"
+  - variable: config.broomlysqlserverHost
+    default: "ur7ibtu3gf.database.windows.net"
+    description: ""
+    type: string
+    required: true
+    label: broomly sql server Host
+    group: "Config"
+  - variable: config.broomlysqlserverUser
+    default: "mhawkins"
+    description: ""
+    type: string
+    required: true
+    label: broomly sql server User
+    group: "Config"
+  - variable: config.broomlysqlserverDatabase
+    default: "BroomlyDB"
+    description: ""
+    type: string
+    required: true
+    label: broomly sql server Database
+    group: "Config"
+  - variable: config.broomlysqlserverPassword
+    default: ""
+    description: ""
+    type: password
+    required: true
+    label: broomly sql server Password
+    group: "Config"
+  - variable: config.redisHost
+    default: "broomly.redis.cache.windows.net"
+    description: ""
+    type: string
+    required: true
+    label: redis host
+    group: "Config"
+  - variable: config.redisPassword
+    default: ""
+    description: ""
+    type: password
+    required: true
+    label: redis password
+    group: "Config"
+  - variable: config.frontappToken
+    default: ""
+    description: ""
+    type: password
+    required: true
+    label: front app token
+    group: "Config"
+  - variable: config.frontappTextChannel
+    default: "cha_k3p"
+    description: ""
+    type: string
+    required: true
+    label: front app Text Channel
+    group: "Config"
+  - variable: config.frontappEmailChannel
+    default: "cha_o5h"
+    description: ""
+    type: string
+    required: true
+    label: front app Email Channel
+    group: "Config"
+  - variable: config.testPhone
+    default: "5127627128"
+    description: ""
+    type: string
+    required: true
+    label: front app test phone
+    group: "Config"
+  - variable: config.testEmail
+    default: "kelly@broomly.com"
+    description: ""
+    type: string
+    required: true
+    label: front app test email
+    group: "Config"
+  - variable: config.testName
+    default: "Testing"
+    description: ""
+    type: string
+    required: true
+    label: front app Test name
+    group: "Config"
+  - variable: config.testDesc
+    default: "Test Contact"
+    description: ""
+    type: string
+    required: true
+    label: front app Test desc
+    group: "Config"
+  - variable: config.maidStripe
+    default: ""
+    description: ""
+    type: password
+    required: true
+    label: front app maid stripe
+    group: "Config"
+  - variable: config.yardStripe
+    default: ""
+    description: ""
+    type: password
+    required: true
+    label: front app yard stripe
     group: "Config"
 
   # Persistence
