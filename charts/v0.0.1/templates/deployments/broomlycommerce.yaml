@@ -33,7 +33,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: brommlycommerce_site_url
+                    key: broomlycommerce_site_url
             - name: SITE_MODE
               valueFrom:
                 configMapKeyRef:
