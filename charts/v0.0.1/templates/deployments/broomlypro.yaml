@@ -39,21 +39,6 @@ spec:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
                     key: site_mode
-            - name: SITE_HOMEPAGE
-              valueFrom:
-                configMapKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: site_homepage
-            - name: SITE_SESSION
-              valueFrom:
-                secretKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: ecommerce_site_session
-            - name: SITE_ZOHO_SOURCE
-              valueFrom:
-                configMapKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: ecommerce_site_zoho_source
             - name: BROOMLYSQLSERVER_HOST
               valueFrom:
                 configMapKeyRef:
@@ -119,16 +104,6 @@ spec:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
                     key: test_desc
-            - name: MAID_STRIPE
-              valueFrom:
-                secretKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: maid_stripe
-            - name: YARD_STRIPE
-              valueFrom:
-                secretKeyRef:
-                    name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: yard_stripe
           livenessProbe:
             httpGet:
               path: /
