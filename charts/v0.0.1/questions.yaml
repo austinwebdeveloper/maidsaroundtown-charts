@@ -147,12 +147,14 @@ questions:
     type: string
     required: true
     label: redis host
+    show_if: config.ecommerce.deploy=true||config.broomlycommerce.deploy=true||config.broomlypro.deploy=true
     group: "Config"
   - variable: config.redisPassword
     default: ""
     description: ""
     type: password
     required: true
+    show_if: config.ecommerce.deploy=true||config.broomlycommerce.deploy=true||config.broomlypro.deploy=true
     label: redis password
     group: "Config"
   - variable: config.frontappToken
