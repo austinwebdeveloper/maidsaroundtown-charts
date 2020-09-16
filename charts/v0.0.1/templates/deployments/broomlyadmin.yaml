@@ -73,7 +73,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: boomlyadmin_redis_auth_pass
+                    key: broomlyadmin_redis_auth_pass
             - name: FRONTAPP_TOKEN
               valueFrom:
                 secretKeyRef:
