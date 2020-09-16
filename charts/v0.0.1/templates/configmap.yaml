@@ -13,7 +13,7 @@ data:
   broomlycommerce_site_url: {{ template "maidsaroundaustin.broomlycommerce-base-url" . }}
   broomlypro_site_url: {{ template "maidsaroundaustin.broomlypro-base-url" . }}
   site_mode: {{ .Values.config.siteMode | quote }}
-  site_homepage: {{ .Values.config.ecommerce.siteHomepage | quote }}
+  site_homepage: {{ .Values.config.siteHomepage | quote }}
   ecommerce_site_zoho_source: {{ .Values.config.ecommerce.siteZohoSource | quote }}
   broomlysqlserver_host: {{ .Values.config.broomlysqlserverHost | quote }}
   broomlysqlserver_user: {{ .Values.config.broomlysqlserverUser | quote }}
