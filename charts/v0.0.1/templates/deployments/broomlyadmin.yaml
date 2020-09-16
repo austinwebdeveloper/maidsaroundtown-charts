@@ -43,7 +43,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: site_homepage
+                    key: broomlyadmin_site_homepage
             - name: BROOMLYSQLSERVER_HOST
               valueFrom:
                 configMapKeyRef:

@@ -21,10 +21,12 @@ config:
     hostname: ""
     siteSession: "broomlycommerce"
     siteZohoSource: ""
+    siteHomepage: ""
   broomlyadmin:
     deploy: false
     baseUrl: ""
     hostname: ""
+    siteHomepage: ""
     redisHost: ""
     redisAuthPass: ""
   broomlypro:
@@ -35,8 +37,8 @@ config:
     deploy: false
     baseUrl: ""
     hostname: ""
+    siteHomepage: ""
   siteMode: ""
-  siteHomepage: ""
   broomlysqlserverHost: ""
   broomlysqlserverUser: ""
   broomlysqlserverDatabase: ""

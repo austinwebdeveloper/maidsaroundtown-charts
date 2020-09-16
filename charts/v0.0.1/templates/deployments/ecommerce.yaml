@@ -43,7 +43,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
-                    key: site_homepage
+                    key: ecommerce_site_homepage
             - name: SITE_SESSION
               valueFrom:
                 secretKeyRef:

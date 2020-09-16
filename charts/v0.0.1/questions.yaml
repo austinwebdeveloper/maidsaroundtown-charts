@@ -89,12 +89,29 @@ questions:
     required: true
     label: site mode
     group: "Config"
-  - variable: config.siteHomepage
+  - variable: config.ecommerce.siteHomepage
+    default: "index-mata-domain.html"
+    description: ""
+    type: string
+    required: true
+    show_if: config.ecommerce.deploy=true
+    label: Ecommerce Homepage
+    group: "Config"
+  - variable: config.broomlycommerce.siteHomepage
     default: "index.html"
     description: ""
     type: string
     required: true
-    label: site Homepage
+    show_if: config.broomlycommerce.deploy=true
+    label: Broomlycommerce Homepage
+    group: "Config"
+  - variable: config.broomlyadmin.siteHomepage
+    default: "index.html"
+    description: ""
+    type: string
+    required: true
+    show_if: config.broomlyadmin.deploy=true
+    label: Broomlyadmin Homepage
     group: "Config"
   - variable: config.broomlysqlserverHost
     default: "ur7ibtu3gf.database.windows.net"

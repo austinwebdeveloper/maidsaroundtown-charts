@@ -39,6 +39,11 @@ spec:
                 configMapKeyRef:
                     name: {{ template "maidsaroundaustin.fullname" . }}
                     key: site_mode
+            - name: SITE_HOMEPAGE
+              valueFrom:
+                configMapKeyRef:
+                    name: {{ template "maidsaroundaustin.fullname" . }}
+                    key: broomlycommerce_site_homepage
             - name: BROOMLYSQLSERVER_HOST
               valueFrom:
                 configMapKeyRef:
