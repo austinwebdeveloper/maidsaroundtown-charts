@@ -8,7 +8,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     {{- if .Values.ingress.broomlyadmin.tls }}
     {{- if (empty .Values.ingress.broomlyadmin.certificate) }}
-    certmanager.k8s.io/cluster-issuer: {{ .Values.ingress.broomlyadmin.issuer.name }}
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.broomlyadmin.issuer.name }}
     kubernetes.io/tls-acme: 'true'
     {{- end }}
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
